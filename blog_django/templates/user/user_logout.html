@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrar Sesión</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Asegúrate de incluir tu archivo CSS -->
+</head>
+
+<body>
+    <div class="logout-container">
+        <h1 class="text--center">¿Está seguro de que desea cerrar sesión?</h1>
+        <form action="{% url 'user_logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Cerrar Sesión</button>
+        </form>
+        <a href="{% url 'user_profile' %}" class="btn">Volver al perfil</a>
+    </div>
+</body>
+
+</html>

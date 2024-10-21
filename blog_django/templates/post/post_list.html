@@ -1,0 +1,47 @@
+<!-- blog_django/templates/post/post_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ view.title }}</h1>
+
+    <form method="GET">
+        <div class="input-group mb-3">
+            {{ filter_form.search_query.label_tag }}
+            {{ filter_form.search_query }}
+            {{ filter_form.order_by.label_tag }}
+            {{ filter_form.order_by }}
+            <button type="submit" class="btn btn-primary">{{ _('Buscar') }}</button>
+        </div>
+    </form>
+
+    {% if posts %}
+        <div class="list-group">
+            {% for post in posts %}
+                <a href="{% url 'post:post_detail' post.slug %}" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <p class="mb-1">{{ post.content|truncatewords:20 }}</p>
+                    <small>{{ post.creation_date }}</small>
+                </a>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {% if pagination.first_page %}
+                <a href="{{ pagination.first_page }}">&laquo; {{ _('Primera') }}</a>
+            {% endif %}
+            {% if pagination.previous_page %}
+                <a href="{{ pagination.previous_page }}">{{ _('Anterior') }}</a>
+            {% endif %}
+            <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if pagination.next_page %}
+                <a href="{{ pagination.next_page }}">{{ _('Siguiente') }}</a>
+            {% endif %}
+            {% if pagination.last_page %}
+                <a href="{{ pagination.last_page }}">{{ _('Última') }} &raquo;</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>{{ _('No hay publicaciones disponibles.') }}</p>
+    {% endif %}
+{% endblock %}

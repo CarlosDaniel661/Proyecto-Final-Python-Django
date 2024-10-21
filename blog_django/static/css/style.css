@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tus estilos personalizados */
+* {
+    box-sizing: border-box;
+    background-color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.uno {
+    margin: 12% 25%;
+    text-align: start;
+    color: aliceblue;
+    width: 50vw;
+    height: auto;
+    border: 10px solid white;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.iniciar {
+    background-color: black;
+    padding: 12% 40%;
+    text-align: center;
+    color: aliceblue;
+}
+
+.registrar {
+    padding: 50px;
+    background-color: black;
+    text-align: center;
+    color: aliceblue;
+}
+
+img {
+    width: 50%;
+    padding-right: 22px;
+}

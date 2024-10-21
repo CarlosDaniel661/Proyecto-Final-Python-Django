@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title_layout %}{% endblock title_layout %}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/icon/carretito.ico' %}" type="image/x-icon" />
+
+    <!-- Tailwind Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Archivo de estilos CSS personalizados -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Confirmado: ruta correcta -->
+
+    <!-- JS principal -->
+    <script src="{% static 'js/main.js' %}"> </script>
+
+    <!-- Tailwind Colors Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: "#da373d",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Bloque extra para agregar contenido específico a la cabecera -->
+    {% block extra_head_layout %}{% endblock extra_head_layout %}
+</head>
+<body>
+    {% include 'components/common/header.html' %} <!-- Incluir el encabezado aquí -->
+    
+    <!-- Bloque de contenido principal -->
+    {% block content_layout %}{% endblock content_layout %}
+
+    {% include 'components/common/footer.html' %} <!-- Incluir el pie de página aquí -->
+</body>
+</html>

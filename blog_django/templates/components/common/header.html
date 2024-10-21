@@ -1,0 +1,27 @@
+{% load static %}
+<header class="h-14 text-white flex justify-center items-center bg-zinc-900">
+    <div class="container mx-4 md:mx-8 lg:mx-40 flex justify-between items-center">
+        <a href="{% url 'home' %}" class="text-lg font-bold hover:text-clifford transition">
+            <img src="{% static 'assets/icon/vista-carrete-pelicula-3d.jpg' %}" alt="Logo" class="h-10">  
+            ES CINE
+        </a>
+        {% include 'components/ui/navbar.html' %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'user:user_profile' pk=user.id %}" class="btn">Perfil</a>
+        {% else %}
+            <a href="{% url 'user:auth_login' %}" class="btn">Iniciar Sesión</a>
+        {% endif %}
+    </div>
+</header>
+
+<nav class="bg-gray-800 p-4">
+    <ul class="flex gap-4">
+        <li><a href="#" class="text-white">Comedia</a></li>
+        <li><a href="#" class="text-white">Drama</a></li>
+        <li><a href="#" class="text-white">Terror</a></li>
+        <li><a href="#" class="text-white">Policial</a></li>
+        <li><a href="#" class="text-white">Ciencia Ficción</a></li>
+    </ul>
+</nav>
+
+

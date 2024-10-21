@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Perfil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Asegúrate de incluir tu archivo CSS -->
+</head>
+
+<body>
+    <div class="update-container">
+        <h1 class="text--center">Actualizar Perfil</h1>
+        <form action="{% url 'user_update' user.id %}" method="POST" class="form update">
+            {% csrf_token %}
+            <div class="form__field">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" class="form__input" value="{{ user.username }}" required>
+            </div>
+            <div class="form__field">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" class="form__input" value="{{ user.email }}" required>
+            </div>
+            <div class="form__field">
+                <input type="submit" value="Actualizar">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!-- blog_django/templates/user/user_profile.html -->
+{% extends 'layouts/general_layout.html' %}  
+{% load static %} 
+{% block title %}User Profile{% endblock title %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Asegúrate de incluir tu archivo CSS -->
+</head>
+<body>
+    {% block content %}
+    <div class="profile-container">
+        <h1 class="text-white">User Profile 😎</h1>
+        <p class="text-white">Alias: {{ user.alias }}</p>
+        {% if user.avatar %}
+            <img class="avatar" src="{{ user.avatar.url }}" alt="Avatar de {{ user.alias }}">
+        {% else %}
+            <img class="avatar" src="{% static 'assets/icon/perfil.png' %}" alt="Avatar por defecto">
+        {% endif %}
+    </div>
+    {% endblock content %}
+</body>
+</html>

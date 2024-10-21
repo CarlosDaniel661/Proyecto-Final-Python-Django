@@ -1,0 +1,68 @@
+<nav>
+    <ul class="flex gap-4">
+        {% if user.is_authenticated %}
+            <strong>{{ user.alias }}</strong>
+            {% if user.is_collaborator or user.is_admin %}
+                <li><a href="{% url 'post:post_create' %}" class="btn">Publicar</a></li>
+                <li><a href="{% url 'post:user_posts' %}" class="btn">Ver mis Posts</a></li>
+            {% endif %}
+            <li><a href="{% url 'user:user_profile' user.pk %}" class="btn">Perfil</a></li>
+            <li>
+                <form method="post" action="{% url 'user:auth_logout' %}?next={{ request.path }}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Cerrar sesión</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="btn">Iniciar sesión</a></li>
+            <li><a href="{% url 'user:auth_register' %}" class="btn">Registrarse</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<style>
+    nav a {
+        text-decoration: none;
+        color: white; /* Color de texto para los enlaces */
+    }
+
+    .btn {
+        background-color: #26d0ce;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: white;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #1abc9c; /* Cambiar color al pasar el ratón */
+    }
+
+    .flex {
+        display: flex;
+        gap: 10px; /* Espacio entre los botones */
+    }
+</style>
+
+
+
+
+
+<!--
+Nota:
+Hemos definido un bloque condicional para mostrar el enlace de Publicar solo si el usuario es un colaborador.
+Hemos definido un bloque condicional para mostrar el enlace de Perfil y Cerrar sesión si el usuario esta autenticado.
+Hemos definido un bloque condicional para mostrar los enlaces de Iniciar sesión y Registrarse si el usuario no esta autenticado.
+
+Importante:
+Para poder definir estos bloques condicionales, es necesario que el usuario este autenticado y que el modelo User tenga las propiedades is_collaborator, is_admin y is_registered.
+En caso de querer mostrar más enlaces de acuerdo al tipo de usuario, se pueden definir más bloques condicionales.
+Tener en cuenta que estas verificaciones son a nivel de plantilla, por lo que se recomienda hacer las verificaciones a nivel de view o middleware para mayor seguridad.
+-->
+
+<!--Nota: Añadimos el parámetro next={{ request.path }} a los botones de Iniciar sesión y Cerrar
+sesión. Esto permite redirigir al usuario a la página en la que estaba después de iniciar o cerrar sesión.
+Importante: El parámetro next se utiliza para redirigir al usuario a la página en la que estaba después
+de iniciar o cerrar sesión.
+Nota: El parámetro request.path contiene la URL de la página actual.-->
+

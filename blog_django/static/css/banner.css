@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    background-color: rgb(0, 0, 0);
+}
+
+img {
+    cursor: pointer;
+}
+
+body {
+    background-color: black;
+}
+
+/* Clases del banner */
+.uno {
+    background-color: black;
+    display: inline;
+    font-family: 'Lato', sans-serif;
+    color: aliceblue;
+}
+
+.uno img {
+    width: 5%;
+    padding-right: 22px;
+}
+
+.uno a {
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.cine {
+    width: 40%;
+    font-size: 100px;
+    font-family: 'Lato', sans-serif;
+    color: aliceblue;
+    justify-self: center;
+}
+
+.dos {
+    padding: 10px;
+    margin-left: 10%;
+    text-align: end;
+}
+
+/* Clases de la búsqueda - incluye bootstrap */
+.busqueda {
+    align-content: center;
+}
+
+.blanco {
+    color: aliceblue;
+    background-color: gray;
+}
+
+.categorias {
+    background-color: black;
+    padding: 20px 10px;
+}
+
+.cinco {
+    position: relative;
+    align-items: center;
+    padding: 30px;
+}
+
+.card {
+    width: 500px;
+    max-height: 80%;
+    text-align: center;
+    background-color: transparent;
+    color: aliceblue;
+    border-radius: 10px;
+}
+
+.card text {
+    display: flex;
+    justify-content: center;
+}
+
+.card-body {
+    background-color: black;
+    border-radius: 10px;
+    overflow: ellipsis;
+    text-align: start;
+}
+
+.card title {
+    font-size: x-large;
+}
+
+.bg {
+    background: black;
+    padding: 50px 0px;
+    flex-wrap: wrap;
+}
+
+.bg .card {
+    background-color: black;
+    margin: 3px;
+}
+
+.contenedor {
+    background: black;
+}
+
+.pie {
+    align-content: end;
+}
+
+a img {
+    width: 70%;
+}
+
+.texto {
+    text-decoration: none;
+    color: aliceblue;
+    margin-top: 30px;
+}
+
+img {
+    width: 8vw;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.movie-poster {
+    max-width: 100%; /* Se adapta al contenedor */
+}
+
+.movie-info {
+    padding-left: 20px;
+}
+
+hr {
+    border-color: red;
+}

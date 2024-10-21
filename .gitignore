@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+env
+.env
+__pycache__
+.vscode
+/blog/media/**/avatar
+/blog/media/**/cover
+entorno
+staticfiles
+venv/
+node_modules/

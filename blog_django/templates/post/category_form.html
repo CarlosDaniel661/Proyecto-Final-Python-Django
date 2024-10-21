@@ -1,0 +1,12 @@
+<!-- blog_django/templates/post/category_form.html -->
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Crear Categoría</button>
+</form>
+
+<!--TODO category update, ver si se puede usar "include" para visualizar edicion en post update-->
+
+<!--TODO category  delete, ver si se puede usar "include" para visualizar eliminacion en post update-->

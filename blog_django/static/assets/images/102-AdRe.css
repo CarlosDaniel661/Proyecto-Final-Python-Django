@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+}
+
+img {
+    cursor: pointer;
+}
+.cero {
+    background: rgb(18,45,100);
+}
+.cero span {
+    color: white;
+    font-size: 4vw;
+    font-family: 'Lato', sans-serif;
+}
+
+.uno span{
+    color: #f3f3f3;
+    font-size: 4vw;
+    font-family: 'Lato', sans-serif;
+}
+.uno img {
+    width: 50px;
+    padding: 2px;
+}
+
+.dos {
+    width: 70%;
+    font-size: 0, 8rem;
+    font-family: 'Lato', sans-serif;
+    color: aliceblue;
+}
+
+.tres span{
+    font-size: 1vw;
+    color: #f3f3f3;
+}
+
+.cuatro {
+    /* background-image: url(/prensa_2023/assets/img/fondo/prensaFotos/COMUNICACIONES.jpg); */
+    background-image: url(./fondo/Tecnologias/programacion2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 400px;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    padding-top: 8%;
+}
+
+.cinco {
+    position: relative;
+    align-items: center;
+    padding: 30px;
+}
+
+.card {
+    text-align: center;
+    background-color: transparent;
+    color: aliceblue;
+    border-radius: 10px;
+}
+.card text{
+    display: flex;
+    justify-content: center;
+}
+.card-body{
+
+    background-color:rgb(34, 105, 236);
+    border-radius: 10px;
+
+}
+.card title {
+    font-size: x-large;
+}
+
+.bg {
+    background: rgb(18,45,100);
+    padding: 10px 0px;
+
+    flex-wrap: wrap;
+
+}
+
+.bg .card {
+    background-color: rgb(0, 0, 139);
+    margin: 3px;
+    
+}
+
+.a {
+    background-color: transparent;
+}
+.contenedor{
+    background: rgb(18,45,100);
+}
+
+.diez {
+    text-align:justify;
+    margin: 40px 100px;
+    padding: 40px;
+    background-color:#122d64;
+    color: aliceblue;
+    border: #0e457b 10px solid;
+    border-radius: 25px ;
+}
+
+.pie{
+    background-color: rgb(28, 28, 28);
+    height: 25px;
+    color: #66ceeb;
+    text-shadow: rgb(28, 28, 28);
+    font-size: 12px;
+    font-family: 'Tahoma', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: scaleY(-2); */
+}
+.pie :hover {
+    
+    transition: transform  8s ;
+    transform: scale3d(1.1,1.1,0);
+    
+    
+}
+
+.container {
+    color: #f3f3f3;
+    font-family: 'Lato', sans-serif;
+    
+}
+.list-nav {
+    font-size: 0.88rem;
+}
