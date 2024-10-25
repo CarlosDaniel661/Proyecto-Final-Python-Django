@@ -1,45 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="banner.css">
-    <title>categorias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/banner.css' %}">
+    <title>Categorías</title>
 </head>
 <body>
-    <div class="categorias">
-  <!-- categorias -->
-  <button type="button" class="btn btn-outline-success my-2">Acción</button>
-  <button type="button" class="btn btn-outline-success my-2">Animación</button>
-  <button type="button" class="btn btn-outline-success my-2">Bélico</button>
-  <button type="button" class="btn btn-outline-success my-2">Biográfico</button>
-  <button type="button" class="btn btn-outline-success my-2">Catástrofe</button>
-  <button type="button" class="btn btn-outline-success my-2">Ciencia Ficción</button>
-  <button type="button" class="btn btn-outline-success my-2">Comedia</button>
-  <button type="button" class="btn btn-outline-success my-2">Documental</button>
-  <button type="button" class="btn btn-outline-success my-2">Drama</button>
-  <button type="button" class="btn btn-outline-success my-2">Espionaje</button>
-  <button type="button" class="btn btn-outline-success my-2">Fantástico</button>
-  <button type="button" class="btn btn-outline-success my-2">Hechos Reales</button>
-  <button type="button" class="btn btn-outline-success my-2">Histórico</button>
-  <button type="button" class="btn btn-outline-success my-2">Musical</button>
-  <button type="button" class="btn btn-outline-success my-2">Policial</button>
-  <button type="button" class="btn btn-outline-success my-2">Románticas</button>
-  <button type="button" class="btn btn-outline-success my-2">Suspenso</button>
-  <button type="button" class="btn btn-outline-success my-2">Terror</button>
-  <button type="button" class="btn btn-outline-success my-2">Thriller</button>
-  <button type="button" class="btn btn-outline-success my-2">Western</button>
-  
-</div>
+    <!-- Incluir el header de categorías -->
+    {% include 'includes/header_category.html' %}
 
-  
-    <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"
-  ></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container my-4">
+        <h2 class="text-center">Categorías de Películas</h2>
+        <div class="row">
+            <!-- Botones de categorías -->
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Acción</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Animación</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Bélico</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Biográfico</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Catástrofe</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Ciencia Ficción</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Comedia</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Documental</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Drama</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Espionaje</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Fantástico</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Hechos Reales</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Histórico</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Musical</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Policial</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Románticas</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Suspenso</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Terror</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Thriller</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-success w-100 my-2">Western</button>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from blog_django.views import IndexView, not_found_view, internal_error_view, forbidden_view
 from django.contrib.auth import views as auth_views
+from . import views
 
 urlpatterns = [
     # Ruta del administrador
@@ -21,6 +22,9 @@ urlpatterns = [
     # Autenticación de usuarios
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+     # Nueva ruta para la búsqueda
+    path('search/', views.search, name='search'),
 ]
 
 # Manejadores de errores

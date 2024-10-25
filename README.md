@@ -47,7 +47,8 @@ artículos.
 │ │ │ ├── configurations/     <--- Configuraciones django
 │ │ │ │ ├── __pycache__/     **Ignorada en el .gitignore**
 │ │ │ │ ├── local.py     <--- Configuraciones para desarrollo local
-│ │ │ │ ├── production.py     <--- Configuraciones para produccion
+│ │ │ │ ├── production.py
+│ │ │ │ ├── base.py     <--- Configuraciones para produccion
 │ │ │ │ └── ...
 │ │ │ ├── __init__.py
 │ │ │ ├── asgi.py
@@ -62,6 +63,7 @@ artículos.
 │ │ │ │ ├── default/
 │ │ │ │ │  ├── post_default.png
 │ │ │ │ └── ...
+│ │ │ ├── node_modules/  <---en el .gitignore**
 │ │ │ ├── user/
 │ │ │ │ ├── avatar/
 │ │ │ │ │  ├── user_b2f479e3-3eaf-4e93-b328-71e845a3795f_avatar.png
@@ -78,6 +80,7 @@ artículos.
 │ │ │ ├── css/
 │ │ │ │ ├── banner.css
 │ │ │ │ ├── style.css
+│ │ │ │ ├── tailwind.css
 │ │ │ │ └── ...
 │ │ │ ├── js/
 │ │ │ │ ├── main.js
@@ -100,7 +103,6 @@ artículos.
 │ │ │ │ ├── error_forbidden.html
 │ │ │ │ └── ...
 │ │ │ ├── includes/
-│ │ │ │ ├── footer.html
 │ │ │ │ ├── header_category.html
 │ │ │ │ └── ...
 │ │ │ ├── layouts/
@@ -129,13 +131,14 @@ artículos.
 │ │ │ │ ├── busqueda.html
 │ │ │ │ ├── categories.html
 │ │ │ │ ├── nosotros.html
-│ │ │ │ ├── politic_privacidad.html
+│ │ │ │ ├── politc_privacidad.html
 │ │ │ │ ├── user_login.html
 │ │ │ │ ├── user_logout.html
 │ │ │ │ ├── user_profile.html
 │ │ │ │ ├── user_sigup.html
 │ │ │ │ ├── user_update.html
 │ │ │ │ └── ...
+│ │ │ ├── search_results.html
 │ │ │ ├── index.html
 │ │ │ └── ...
 │ │ ├── db.sqlite3       <--- Base de datos -  en el .gitignore**

@@ -10,7 +10,7 @@ class IndexView(ListView):
     template_name = 'index.html'
 
     model =  Post
-    context_object_name=  'posts'
+    context_object_name= 'posts'
     paginate_by = 9 # Definimos la paginación de 10 posts por página
 
     def category_view(request):
@@ -23,17 +23,28 @@ class IndexView(ListView):
         
         search_query = self.request.GET.get('search_query', '')
         order_by = self.request.GET.get('order_by', '-creation_date')
-        
+        category_filter = self.request.GET.get('category_filter', '')
+
         # Filtramos por título o autor si se proporciona una búsqueda
         if search_query:
             queryset = queryset.filter(title__icontains=search_query) |queryset.filter(author__username__icontains=search_query)
-            
+
+        if category_filter:
+            queryset = queryset.filter(category__slug__icontains=category_filter)
+
         return queryset.order_by(order_by)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = PostFilterForm(self.request.GET) # Pasamos el formulario de filtro al contexto
-        
+        posts_with_images = []
+        for post in context['posts']:
+            first_image = post.images.filter(active=True).first()
+            posts_with_images.append({
+                'post': post,
+                'first_image': first_image
+            })
+        context['posts_with_images'] = posts_with_images
         context['categories'] = Category.objects.all()
         
         # Manejamos la paginación
@@ -77,6 +88,11 @@ def internal_error_view(request):
         
 def forbidden_view(request, exception):
     return render(request, 'errors/error_forbidden.html', status=403)
+
+def search(request):
+    query = request.GET.get('q')
+    results = Post.objects.filter(title__icontains=query)  # Busca posts cuyo título contenga la query
+    return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
 @login_required

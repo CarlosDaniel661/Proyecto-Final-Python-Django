@@ -1,22 +1,19 @@
+/* Reset básico */
 * {
     box-sizing: border-box;
-    background-color: rgb(0, 0, 0);
-}
-
-img {
-    cursor: pointer;
 }
 
 body {
     background-color: black;
+    color: aliceblue;
+    font-family: 'Lato', sans-serif;
 }
 
 /* Clases del banner */
 .uno {
-    background-color: black;
-    display: inline;
-    font-family: 'Lato', sans-serif;
+    display: inline-block;
     color: aliceblue;
+    background-color: black;
 }
 
 .uno img {
@@ -28,108 +25,77 @@ body {
     text-decoration: none;
     color: aliceblue;
     font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.uno a:hover {
+    color: red;
 }
 
 .cine {
     width: 40%;
     font-size: 100px;
-    font-family: 'Lato', sans-serif;
-    color: aliceblue;
-    justify-self: center;
+    text-align: center;
+    margin: 0 auto;
 }
 
-.dos {
-    padding: 10px;
-    margin-left: 10%;
-    text-align: end;
-}
-
-/* Clases de la búsqueda - incluye bootstrap */
+/* Sección de búsqueda */
 .busqueda {
-    align-content: center;
+    margin: 0 auto;
 }
 
 .blanco {
-    color: aliceblue;
     background-color: gray;
+    color: aliceblue;
 }
 
+/* Categorías */
 .categorias {
     background-color: black;
     padding: 20px 10px;
 }
 
-.cinco {
-    position: relative;
-    align-items: center;
-    padding: 30px;
-}
-
 .card {
-    width: 500px;
-    max-height: 80%;
+    width: 100%;
+    max-width: 500px;
     text-align: center;
     background-color: transparent;
     color: aliceblue;
     border-radius: 10px;
 }
 
-.card text {
-    display: flex;
-    justify-content: center;
-}
-
 .card-body {
     background-color: black;
     border-radius: 10px;
-    overflow: ellipsis;
     text-align: start;
 }
 
-.card title {
-    font-size: x-large;
-}
-
 .bg {
-    background: black;
-    padding: 50px 0px;
-    flex-wrap: wrap;
-}
-
-.bg .card {
     background-color: black;
-    margin: 3px;
-}
-
-.contenedor {
-    background: black;
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .pie {
-    align-content: end;
+    text-align: center;
 }
 
+/* Imágenes dentro de enlaces */
 a img {
     width: 70%;
 }
 
+/* Texto */
 .texto {
     text-decoration: none;
     color: aliceblue;
     margin-top: 30px;
 }
 
-img {
-    width: 8vw;
-}
-
-body {
-    background-color: black;
-    color: white;
-}
-
 .movie-poster {
-    max-width: 100%; /* Se adapta al contenedor */
+    max-width: 100%;
 }
 
 .movie-info {
@@ -138,4 +104,42 @@ body {
 
 hr {
     border-color: red;
+}
+
+/* Estilo de botones */
+.button {
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.button:hover {
+    background-color: #2ee59d;
+    color: #000;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de botón para agregar/editar categorías */
+.button-category {
+    background-color: #48bb78; /* Color del botón */
+    color: white; /* Color del texto */
+    padding: 10px 20px;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.button-category:hover {
+    background-color: #38a169; /* Color en hover */
 }

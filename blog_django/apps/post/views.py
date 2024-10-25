@@ -9,26 +9,34 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from apps.post.models import Comment, Post, PostImage, Category, Movie
 from django.db.models import Count
 from django.utils.text import slugify
+from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.decorators import method_decorator
+from django.shortcuts import render
+from .models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
 class PostListView(ListView):
-    model =  Post
+    model = Post
     template_name = 'post/post_list.html'
-    context_object_name=  'posts'
-    paginate_by = 9 # Definimos la paginación de 10 posts por página
-    
+    context_object_name = 'posts'
+    paginate_by = 9  # Define la paginación de 9 posts por página
+
     def get_queryset(self):
         queryset = Post.objects.all().annotate(comments_count=Count('comments'))
-        # Anotamos la cantidad de comentarios en cada post
-        
+
         search_query = self.request.GET.get('search_query', '')
         order_by = self.request.GET.get('order_by', '-creation_date')
-        
-        # Filtramos por título o autor si se proporciona una búsqueda
+
+        # Filtra por título o autor si se proporciona una búsqueda
         if search_query:
-            queryset = queryset.filter(title__icontains=search_query) |queryset.filter(author__username__icontains=search_query)
-            
+            queryset = queryset.filter(
+                title__icontains=search_query
+            ) | queryset.filter(
+                author__username__icontains=search_query
+            )
+
         return queryset.order_by(order_by)
     
     #NAVBAR DE CATEGORIAS
@@ -95,6 +103,7 @@ El método get_queryset obtiene los posts y los anota con la cantidad de comenta
 El método get_context_data agrega el formulario de filtro al contexto y maneja la lógica de paginación, creando enlaces para navegar entre páginas.
 """
 
+@method_decorator([login_required, permission_required('post.add_post', raise_exception=True)], name='dispatch')
 class PostCreateView(CreateView):
     model = Post
     form_class = NewPostForm
@@ -103,25 +112,23 @@ class PostCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         post = form.save()
-        
+
         images = self.request.FILES.getlist('images')
-        
         if images:
             for image in images:
                 PostImage.objects.create(post=post, image=image)
         else:
             PostImage.objects.create(post=post, image=settings.DEFAULT_POST_IMAGE)
-            
+
         return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()  # Pasa la lista de categorías
+        context['categories'] = Category.objects.all()
         return context
-    
+
     def get_success_url(self):
         return reverse('post:post_detail', kwargs={'slug': self.object.slug})
-
 
 class PostDetailView(DetailView):
     template_name = 'post/post_detail.html'
@@ -170,7 +177,7 @@ class PostDetailView(DetailView):
         return context
     
     
-    
+@method_decorator([login_required, permission_required('post.change_post', raise_exception=True)], name='dispatch')    
 class PostUpdateView(UpdateView):
     model = Post
     form_class = UpdatePostForm
@@ -220,6 +227,7 @@ class PostUpdateView(UpdateView):
         return reverse_lazy('post:post_detail', kwargs={'slug': self.object.slug})
 
 
+@method_decorator([login_required, permission_required('post.delete_post', raise_exception=True)], name='dispatch')
 class PostDeleteView(DeleteView):
     template_name = 'post/post_delete.html'
     model = Post
@@ -232,7 +240,7 @@ class PostDeleteView(DeleteView):
 class UserPostView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post/user_posts.html'  # Nueva plantilla para posts del usuario
-    context_object_name = 'posts'
+    context_object_name = 'posts'  # Cambiar de 'user_posts' a 'posts' para mayor claridad
     paginate_by = 6
 
     def get_queryset(self):
@@ -323,7 +331,15 @@ def movie_list_view(request):
 
     return render(request, 'movies/movie_list.html', {'movies': movies, 'category': category_slug})
 
-
+def search(request):
+    query = request.GET.get('q')
+    # Lógica de búsqueda, por ejemplo:
+    # resultados = Post.objects.filter(title__icontains=query)
+    context = {
+        'query': query,
+        # 'resultados': resultados
+    }
+    return render(request, 'user/busqueda.html', context)
 
 
 # Vista para actualizar CRUD de categorías
@@ -376,50 +392,63 @@ class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'post/category_form.html'
     success_url = reverse_lazy('post:post_detail')
 
+from django.shortcuts import render
 
+def vista_principal(request):
+    context = {}
 
-"""
-La vista CommentCreateView hereda de CreateView y se encarga de gestionar la creación de un nuevo comentario.
-El método form_valid asigna el autor del comentario como el usuario autenticado y relaciona el comentario con el post actual.
-El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha creado.
-"""
+    if request.user.is_superuser:
+        context['botones'] = 'admin'
+    elif request.user.groups.filter(name='Collaborators').exists():
+        context['botones'] = 'colaborador'
+    elif request.user.is_authenticated:
+        context['botones'] = 'usuario_registrado'
+    else:
+        context['botones'] = 'anonimo'
 
-"""
-La vista CommentUpdateView hereda de UpdateView de Django que permite actualizar un objeto
-existente, en este caso, un comentario. Se utiliza el formulario CommentForm para editar el contenido
-del comentario.
-Definimos la variable login_url para redirigir al usuario a la página de inicio de sesión si no está
-autenticado.
-El método get_object se encarga de obtener el comentario que se desea editar. Utilizamos el
-parámetro pk para identificar el comentario que se desea editar.
-El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha
-editado.
-Utilizamos el método test_func para verificar si el usuario autenticado es el autor del comentario.
-Solo el autor del comentario puede editar su propio comentario. Caso contrario se redirigira a una
-página de error 403.
-"""
+    return render(request, 'post/post_list.html', context)
+# """
+# La vista CommentCreateView hereda de CreateView y se encarga de gestionar la creación de un nuevo comentario.
+# El método form_valid asigna el autor del comentario como el usuario autenticado y relaciona el comentario con el post actual.
+# El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha creado.
+# """
 
-"""
-La vista CommentDeleteView hereda de DeleteView de Django que permite eliminar un objeto
-existente, en este caso, un comentario.
-Definimos la variable login_url para redirigir al usuario a la página de inicio de sesión si no está
-autenticado.
-El método get_object se encarga de obtener el comentario que se desea eliminar. Utilizamos el
-parámetro pk para identificar el comentario que se desea eliminar.
-El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha
-eliminado.
-Utilizamos el método test_func para verificar si el usuario autenticado es el autor del comentario, el
-autor del post o un administrador. Solo el autor del comentario, el autor del post o un administrador
-pueden eliminar un comentario. Caso contrario se redirigira a una página de error 403.
-Solo los usuarios autenticados pueden eliminar sus propios comentarios. Solo el colaborador autor del
-post o un administrador pueden eliminar cualquier comentario.
-"""
+# """
+# La vista CommentUpdateView hereda de UpdateView de Django que permite actualizar un objeto
+# existente, en este caso, un comentario. Se utiliza el formulario CommentForm para editar el contenido
+# del comentario.
+# Definimos la variable login_url para redirigir al usuario a la página de inicio de sesión si no está
+# autenticado.
+# El método get_object se encarga de obtener el comentario que se desea editar. Utilizamos el
+# parámetro pk para identificar el comentario que se desea editar.
+# El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha
+# editado.
+# Utilizamos el método test_func para verificar si el usuario autenticado es el autor del comentario.
+# Solo el autor del comentario puede editar su propio comentario. Caso contrario se redirigira a una
+# página de error 403.
+# """
 
-"""
-Nota: En la vista PostDetailView, agregamos la lógica para mostrar un formulario de confirmación de
-eliminación de comentarios.
-Si el usuario autenticado es el autor del comentario, el autor del post, un administrador o un
-superusuario, se muestra un formulario de confirmación de eliminación.
-Si el usuario autenticado no tiene permiso para eliminar el comentario, no se muestra el formulario de
-confirmación de eliminación.
-"""
+# """
+# La vista CommentDeleteView hereda de DeleteView de Django que permite eliminar un objeto
+# existente, en este caso, un comentario.
+# Definimos la variable login_url para redirigir al usuario a la página de inicio de sesión si no está
+# autenticado.
+# El método get_object se encarga de obtener el comentario que se desea eliminar. Utilizamos el
+# parámetro pk para identificar el comentario que se desea eliminar.
+# El método get_success_url redirige a la vista de detalle del post una vez que el comentario se ha
+# eliminado.
+# Utilizamos el método test_func para verificar si el usuario autenticado es el autor del comentario, el
+# autor del post o un administrador. Solo el autor del comentario, el autor del post o un administrador
+# pueden eliminar un comentario. Caso contrario se redirigira a una página de error 403.
+# Solo los usuarios autenticados pueden eliminar sus propios comentarios. Solo el colaborador autor del
+# post o un administrador pueden eliminar cualquier comentario.
+# """
+
+# """
+# Nota: En la vista PostDetailView, agregamos la lógica para mostrar un formulario de confirmación de
+# eliminación de comentarios.
+# Si el usuario autenticado es el autor del comentario, el autor del post, un administrador o un
+# superusuario, se muestra un formulario de confirmación de eliminación.
+# Si el usuario autenticado no tiene permiso para eliminar el comentario, no se muestra el formulario de
+# confirmación de eliminación.
+# """

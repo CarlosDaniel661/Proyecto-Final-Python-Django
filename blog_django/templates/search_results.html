@@ -1,0 +1,14 @@
+{% load static %}
+<h1>Resultados de búsqueda para "{{ query }}"</h1>
+
+{% if results %}
+    <ul>
+        {% for post in results %}
+            <li>
+                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron resultados.</p>
+{% endif %}

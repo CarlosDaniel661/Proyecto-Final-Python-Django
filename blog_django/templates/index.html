@@ -1,111 +1,68 @@
-{% extends 'layouts/base_layout.html' %} <!-- Corregido para la ruta del layout -->
+{% extends 'layouts/base_layout.html' %}
 
-{% load static %} <!-- Asegúrate de que esta línea esté presente -->
+{% load static %}
 
 {% block title_layout %}Es Cine{% endblock title_layout %}
 
 {% block content_layout %}
 <!-- Contenido Principal -->
-<div class="contenedor">
-    <div class="container">
-        <div class="cinco">
-            <div class="card-group ">
-                <!-- Ejemplo de película -->
-                <div class="card">
-                    <img src="{% static 'assets/images/starwar.jpg' %}" class="card-img" alt="La guerra de las galaxias">
-                    <div class="card-body">
-                        <h5 class="card-title">La guerra de las galaxias</h5>
-                        <p class="card-text">Director: George Lucas</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{% static 'assets/images/harryPotter.webp' %}" class="card-img" alt="Harry Potter">
-                    <div class="card-body">
-                        <h5 class="card-title">Harry Potter</h5>
-                        <p class="card-text">Director: Chris Columbus - Alfonso Cuarón</p>
-                    </div>
-                </div>
+<div class="container">
+    <h1 class="text-center my-4">Películas Recomendadas</h1>
 
-               </div>
-                <!-- 3° -->
-                <div class="card">
-                    <img src="{% static 'assets/images/Django.webp' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">Django</h5>
-                    <p class="card-text text-start">director: Quentin Tarantino.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-                </div>
-        </div>
-                <!-- 4° -->
-        <div class="card-group ">
-            <div class="card">
-                    <img src="{% static 'assets/images/annabelle.jpg' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">Annabelle</h5>
-                    <p class="card-text text-start">director: George Lucas.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-                <!-- 5° -->
-            <div class="card">
-                    <img src="{% static 'assets/images/IndianaJones.webp' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">Indiana Jones</h5>
-                    <p class="card-text text-start">director: George Lucas.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-                <!-- 6° -->
-            <div class="card">
-                    <img src="{% static 'assets/images/TopGun.webp' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start text-start">TopGun</h5>
-                    <p class="card-text text-start">director: George Lucas.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-        </div>
+    <!-- Menú Desplegable de Categorías -->
+    <div class="dropdown mb-4">
+        <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Selecciona una Categoría
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <!-- <li><a class="dropdown-item" href="#">Acción</a></li>
+            <li><a class="dropdown-item" href="#">Animación</a></li>
+            <li><a class="dropdown-item" href="#">Bélico</a></li>
+            <li><a class="dropdown-item" href="#">Biográfico</a></li>
+            <li><a class="dropdown-item" href="#">Catástrofe</a></li>
+            <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
+            <li><a class="dropdown-item" href="#">Comedia</a></li>
+            <li><a class="dropdown-item" href="#">Documental</a></li>
+            <li><a class="dropdown-item" href="#">Drama</a></li>
+            <li><a class="dropdown-item" href="#">Espionaje</a></li>
+            <li><a class="dropdown-item" href="#">Fantástico</a></li>
+            <li><a class="dropdown-item" href="#">Hechos Reales</a></li>
+            <li><a class="dropdown-item" href="#">Histórico</a></li>
+            <li><a class="dropdown-item" href="#">Musical</a></li>
+            <li><a class="dropdown-item" href="#">Policial</a></li>
+            <li><a class="dropdown-item" href="#">Románticas</a></li>
+            <li><a class="dropdown-item" href="#">Suspenso</a></li>
+            <li><a class="dropdown-item" href="#">Terror</a></li>
+            <li><a class="dropdown-item" href="#">Thriller</a></li>
+            <li><a class="dropdown-item" href="#">Western</a></li> -->
+            {% for category in categories %} 
+            <li><a class="dropdown-item" href="{% url 'home' %}?category_filter={{category.slug}}">{{category.title}}</a></li>
+            {% endfor %}
 
-        <div class="card-group ">
-                <!-- 7° -->
-            <div class="card">
-                    <img src="{% static 'assets/images/MasacreTexas.webp' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">La Masacre de Texas</h5>
-                    <p class="card-text text-start">director: Kim Henkel.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-                <!-- 8° -->
-            <div class="card">
-                    <img src="{% static 'assets/images/terminator.webp' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">Terminator</h5>
-                    <p class="card-text text-start">director: James Cameron .</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-                <!-- 9° -->
-            <div class="card">
-                    <img src="{% static 'assets/images/volerFuturo.jpg' %}" class="card-img" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-start">Volver al Futuro</h5>
-                    <p class="card-text text-start">director: Robert Zemeckis.</p>
-                    <span>Comentario: Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit temporibus dolor, similique repellat saepe vero suscipit quis, vel, sunt nihil ab distinctio neque architecto nam.</span>
-                </div>
-            </div>
-        </div>
+        </ul>
     </div>
+    <div class="row">
+    {% for post_with_img in posts_with_images %}
+    
+    
+            <!-- Ejemplo de película -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{post_with_img.first_image.image.url}}" class="card-img-top" alt="{{post_with_img.post.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{post_with_img.post.title}}</h5>
+                    <p class="card-text">Director: George Lucas</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Sin resultados</p>
+    {% endfor %}
+
+<!-- Sección de avisos -->
+<div class="avisos-section">
+    {% include 'user/avisos.html' %}
+
 </div>
-</div>
-script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
 
 {% endblock content_layout %}

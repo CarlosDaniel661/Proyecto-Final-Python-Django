@@ -1,19 +1,38 @@
-<!-- blog_django/templates/post/post_list.html -->
-
-{% extends 'base.html' %}
+{% extends 'layouts/base_layout.html' %}
+{% load static %}
+{% block title_layout %}Lista de Publicaciones | BLOG IA{% endblock title_layout %}
 
 {% block content %}
-    <h1>{{ view.title }}</h1>
+    <h1>Lista de Publicaciones</h1>
 
     <form method="GET">
         <div class="input-group mb-3">
-            {{ filter_form.search_query.label_tag }}
-            {{ filter_form.search_query }}
-            {{ filter_form.order_by.label_tag }}
-            {{ filter_form.order_by }}
-            <button type="submit" class="btn btn-primary">{{ _('Buscar') }}</button>
+            <input type="text" name="search_query" placeholder="Buscar..." class="form-control" aria-label="Buscar...">
+            <select name="order_by" class="form-select">
+                <option value="-creation_date">Más recientes</option>
+                <option value="creation_date">Más antiguos</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Buscar</button>
         </div>
     </form>
+
+    <!-- Bloque de botones basado en el rol del usuario -->
+    <nav>
+        {% if botones == 'admin' %}
+            <button class="btn btn-warning">Gestionar Usuarios</button>
+            <button class="btn btn-danger">Configurar Sistema</button>
+            <button class="btn btn-info">Ver Reportes</button>
+        {% elif botones == 'colaborador' %}
+            <button class="btn btn-success">Ver Posts</button>
+            <button class="btn btn-primary">Editar Posts</button>
+        {% elif botones == 'usuario_registrado' %}
+            <button class="btn btn-secondary">Perfil</button>
+            <button class="btn btn-dark">Mis Publicaciones</button>
+        {% else %}
+            <button class="btn btn-outline-primary">Registrarse</button>
+            <button class="btn btn-outline-secondary">Iniciar Sesión</button>
+        {% endif %}
+    </nav>
 
     {% if posts %}
         <div class="list-group">
@@ -27,21 +46,23 @@
         </div>
 
         <div class="pagination">
-            {% if pagination.first_page %}
-                <a href="{{ pagination.first_page }}">&laquo; {{ _('Primera') }}</a>
-            {% endif %}
-            {% if pagination.previous_page %}
-                <a href="{{ pagination.previous_page }}">{{ _('Anterior') }}</a>
-            {% endif %}
-            <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-            {% if pagination.next_page %}
-                <a href="{{ pagination.next_page }}">{{ _('Siguiente') }}</a>
-            {% endif %}
-            {% if pagination.last_page %}
-                <a href="{{ pagination.last_page }}">{{ _('Última') }} &raquo;</a>
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; Primera</a>
+                {% endif %}
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                {% endif %}
+                <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                {% endif %}
             {% endif %}
         </div>
     {% else %}
-        <p>{{ _('No hay publicaciones disponibles.') }}</p>
+        <p>No hay publicaciones disponibles.</p>
     {% endif %}
 {% endblock %}

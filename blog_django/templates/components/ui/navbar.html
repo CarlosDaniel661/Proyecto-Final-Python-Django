@@ -1,48 +1,35 @@
+{% load static %}
 <nav>
-    <ul class="flex gap-4">
+    <ul class="flex flex-wrap gap-4 items-center justify-center">
         {% if user.is_authenticated %}
-            <strong>{{ user.alias }}</strong>
-            {% if user.is_collaborator or user.is_admin %}
-                <li><a href="{% url 'post:post_create' %}" class="btn">Publicar</a></li>
-                <li><a href="{% url 'post:user_posts' %}" class="btn">Ver mis Posts</a></li>
-            {% endif %}
-            <li><a href="{% url 'user:user_profile' user.pk %}" class="btn">Perfil</a></li>
+            <li><strong>{{ user.alias }}</strong></li>
+            <!-- Botones visibles para todos los usuarios autenticados -->
+            <li><a href="{% url 'post:post_create' %}" class="btn btn-header">Publicar</a></li>
+            <li><a href="{% url 'post:user_posts' %}" class="btn btn-header">Ver mis Posts</a></li>
+            <li><a href="{% url 'user:profile' %}" class="btn btn-header">Perfil</a></li>
             <li>
                 <form method="post" action="{% url 'user:auth_logout' %}?next={{ request.path }}">
                     {% csrf_token %}
-                    <button type="submit" class="btn">Cerrar sesión</button>
+                    <button type="submit" class="btn btn-header">Cerrar sesión</button>
                 </form>
             </li>
+
+            {% if user.is_staff %}
+                <!-- Enlaces para administradores y colaboradores -->
+                <li><a href="{% url 'post:category_create' %}" class="btn btn-header">Crear Categoría</a></li>
+                <li><a href="{% url 'post:post_list' %}" class="btn btn-header">Ver Todos los Posts</a></li>
+            {% elif user.is_authenticated %}
+                <!-- Enlaces para miembros o usuarios registrados -->
+                <li><a href="{% url 'post:post_list' %}" class="btn btn-header">Ver Todos los Posts</a></li>
+            {% endif %}
         {% else %}
-            <li><a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="btn">Iniciar sesión</a></li>
-            <li><a href="{% url 'user:auth_register' %}" class="btn">Registrarse</a></li>
+            <li><a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="btn btn-header">Iniciar sesión</a></li>
+            <li><a href="{% url 'user:auth_register' %}" class="btn btn-header">Registrarse</a></li>
         {% endif %}
     </ul>
 </nav>
 
-<style>
-    nav a {
-        text-decoration: none;
-        color: white; /* Color de texto para los enlaces */
-    }
 
-    .btn {
-        background-color: #26d0ce;
-        padding: 10px 15px;
-        border-radius: 5px;
-        color: white;
-        transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #1abc9c; /* Cambiar color al pasar el ratón */
-    }
-
-    .flex {
-        display: flex;
-        gap: 10px; /* Espacio entre los botones */
-    }
-</style>
 
 
 
@@ -50,7 +37,7 @@
 
 <!--
 Nota:
-Hemos definido un bloque condicional para mostrar el enlace de Publicar solo si el usuario es un colaborador.
+Hemos definido un bloque condicional para mostrar el enlace de Publicar solo si el usuario está debidamente autenticado.
 Hemos definido un bloque condicional para mostrar el enlace de Perfil y Cerrar sesión si el usuario esta autenticado.
 Hemos definido un bloque condicional para mostrar los enlaces de Iniciar sesión y Registrarse si el usuario no esta autenticado.
 

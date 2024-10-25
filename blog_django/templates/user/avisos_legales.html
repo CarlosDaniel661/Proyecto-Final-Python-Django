@@ -1,18 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Asegúrate de ajustar la ruta del CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Avisos Legales</title>
 </head>
 <body>
-    
     <div class="uno">
-        <h1>ADVERTENCIAS Y REGLAS</h1>
+        <h1>Avisos Legales</h1>
         <p>
-            ©ES CINE. TODOS LOS DERECHOS RESERVADOS
+            Bienvenido/a a nuestro sitio web. Al acceder y utilizar este sitio, aceptas cumplir con los siguientes términos y condiciones:
+
+            El contenido de este sitio es informativo y no constituye asesoramiento legal, financiero o profesional.
+            No nos hacemos responsables de la exactitud, integridad o actualidad de la información proporcionada.
+            El uso indebido del sitio o cualquier actividad ilegal está prohibido.
         </p>
+
+        <!-- Botón para volver a la página de inicio -->
+        <a href="{% url 'home' %}" class="btn-header">Volver a inicio</a>
     </div>
 </body>
 </html>

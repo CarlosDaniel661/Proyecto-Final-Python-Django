@@ -96,7 +96,7 @@ class MovieFilterForm(forms.Form):
     )
 
 
-#TODO: formulario category
+
 
 class CategoryCreateForm(forms.ModelForm):
     class Meta:

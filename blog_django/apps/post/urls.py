@@ -1,33 +1,31 @@
-# blog_django/apps/post/urls.py
 from django.urls import path
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 import apps.post.views as views
 from .views import UserPostView
+from .views import PostCreateView, PostListView, PostDetailView, PostUpdateView, PostDeleteView, CommentCreateView, CommentUpdateView, CommentDeleteView, UserPostView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView, movie_list_view, search
+
 app_name = 'post'
 
-urlpatterns = [
-# Como cada post tiene un uuid, deberiamos usar un slug en lugar de el uuid como parametro
-# Un slug es una cadena de texto que identifica de manera unica un recurso
-# Pero a diferencia de un uuid, un slug es mas facil de recordar y de escribir
-# En este caso, un post podria tener un slug que sea el titulo del post
+# Aplicamos decoradores de permisos a las vistas basadas en clases
+post_create_decorator = method_decorator(login_required, name='dispatch')
+post_update_delete_decorator = method_decorator(login_required, name='dispatch')
 
-# path('post/<str:slug>/', views.post_detail, name='post_detail'),
-# path('post/<str:slug>/edit/', views.post_edit, name='post_edit'),
-    path('posts/', views.PostListView.as_view(), name="post_list"),
-    path('posts/create', views.PostCreateView.as_view(), name="post_create"),
-    path('posts/<slug:slug>/', views.PostDetailView.as_view(),
-    name="post_detail"),
-    path('posts/<slug:slug>/update', views.PostUpdateView.as_view(),
-    name="post_update"),
-    path('posts/<slug:slug>/delete', views.PostDeleteView.as_view(),
-    name="post_delete"),
-    path('posts/<slug:slug>/comments/create/', views.CommentCreateView.as_view(), name='comment_create'),
-    path('comments/<uuid:pk>/update/', views.CommentUpdateView.as_view(), name='comment_update'),
-    path('comments/<uuid:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
-    path('user/', UserPostView.as_view(), name='user_posts'),  # Nueva URL para posts de un usuario
-    path('categories/create/', views.CategoryCreateView.as_view(), name='category_create'), #Urls para categorias vistas
-    path('categories/<uuid:id>/update/', views.CategoryUpdateView.as_view(), name='category_update'),
-    path('categories/<uuid:id>/delete/', views.CategoryDeleteView.as_view(), name='category_delete'),
-    path('movies/', views.movie_list_view, name='movie_list'),  #ruta de movie_list
+urlpatterns = [
+    path('posts/', PostListView.as_view(), name="post_list"),
+    path('posts/create/', PostCreateView.as_view(), name="post_create"),
+    path('posts/<slug:slug>/', PostDetailView.as_view(), name="post_detail"),
+    path('posts/<slug:slug>/update/', PostUpdateView.as_view(), name="post_update"),
+    path('posts/<slug:slug>/delete/', PostDeleteView.as_view(), name="post_delete"),
+    path('posts/<slug:slug>/comments/create/', CommentCreateView.as_view(), name='comment_create'),
+    path('comments/<uuid:pk>/update/', CommentUpdateView.as_view(), name='comment_update'),
+    path('comments/<uuid:pk>/delete/', CommentDeleteView.as_view(), name='comment_delete'),
+    path('mis-posts/', UserPostView.as_view(), name='user_posts'),
+    path('categories/create/', CategoryCreateView.as_view(), name='category_create'),
+    path('categories/<uuid:id>/update/', CategoryUpdateView.as_view(), name='category_update'),
+    path('categories/<uuid:id>/delete/', CategoryDeleteView.as_view(), name='category_delete'),
+    path('movies/', movie_list_view, name='movie_list'),
+    path('search/', search, name='search'),
 ]
 
 
