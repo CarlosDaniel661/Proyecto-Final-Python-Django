@@ -1,12 +1,21 @@
-<!-- blog_django/templates/post/category_form.html -->
 {% load static %}
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Crear Categoría</button>
-</form>
-
-<!--TODO category update, ver si se puede usar "include" para visualizar edicion en post update-->
-
-<!--TODO category  delete, ver si se puede usar "include" para visualizar eliminacion en post update-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Crear Categoría</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="form-header">Crear Nueva Categoría</h1>
+        <form method="post" action="{% url 'post:category_create' %}" class="category-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Crear</button>
+        </form>
+        <a href="{% url 'post:post_list' %}" class="btn-back">Volver al inicio</a>
+    </div>
+</body>
+</html>

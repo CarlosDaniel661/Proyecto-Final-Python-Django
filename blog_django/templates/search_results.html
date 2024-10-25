@@ -1,14 +1,26 @@
 {% load static %}
-<h1>Resultados de búsqueda para "{{ query }}"</h1>
-
-{% if results %}
-    <ul>
-        {% for post in results %}
-            <li>
-                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No se encontraron resultados.</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Resultados de búsqueda</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="search-header">Resultados de búsqueda para "{{ query }}"</h1>
+        {% if results %}
+            <ul class="result-list">
+                {% for post in results %}
+                    <li class="result-item">
+                        <a href="{% url 'post:post_detail' post.slug %}" class="result-link">{{ post.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-results">No se encontraron resultados.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

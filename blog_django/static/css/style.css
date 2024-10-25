@@ -196,3 +196,122 @@ a img {
     }
 }
 
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.search-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.result-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.result-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-link {
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+.result-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.no-results {
+    font-size: 16px;
+    text-align: center;
+    color: #999;
+}
+.form-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.category-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.category-form p {
+    margin-bottom: 15px;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.btn-back {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+}
+
+.btn-back:hover {
+    color: #007bff;
+    background-color: #f1f1f1;
+}
+.order-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.order-buttons .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+.post-thumbnail {
+    width: 100%; /* Ajuste de tamaño del contenedor de la imagen */
+    max-height: 200px; /* Define un alto máximo */
+    overflow: hidden; /* Para evitar el desbordamiento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-fluid {
+    width: auto;
+    height: 100%; /* Escala la altura automáticamente */
+    object-fit: cover; /* Mantiene el centro de la imagen visible */
+}

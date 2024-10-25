@@ -3,6 +3,14 @@
 {% block title_layout %}Lista de Publicaciones | BLOG IA{% endblock title_layout %}
 
 {% block content %}
+
+<div class="order-buttons">
+    <a href="?order=-creation_date" class="btn btn-primary">Ordenar por Fecha (Reciente)</a>
+    <a href="?order=creation_date" class="btn btn-primary">Ordenar por Fecha (Antiguo)</a>
+    <a href="?order=title" class="btn btn-primary">Ordenar Alfabéticamente (A-Z)</a>
+    <a href="?order=-title" class="btn btn-primary">Ordenar Alfabéticamente (Z-A)</a>
+</div>
+
     <h1>Lista de Publicaciones</h1>
 
     <form method="GET">
