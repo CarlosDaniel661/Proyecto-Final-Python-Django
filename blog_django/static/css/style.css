@@ -1,13 +1,14 @@
+
 /* Tailwind Base */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Tus estilos personalizados */
 /* Reset y estilos base */
 * {
     box-sizing: border-box;
 }
-
 body {
     background-color: black;
     color: aliceblue;
@@ -18,6 +19,7 @@ body {
 .uno {
     margin: 12% 25%;
     text-align: start;
+    color: aliceblue;
     width: 50vw;
     height: auto;
     border: 10px solid white;
@@ -26,9 +28,11 @@ body {
     color: aliceblue;
 }
 
+.iniciar {
 /* Secciones principales */
 .iniciar, .registrar {
     background-color: black;
+    padding: 12% 40%;
     text-align: center;
     color: aliceblue;
 }
@@ -36,9 +40,11 @@ body {
 .iniciar {
     padding: 12% 40%;
 }
-
 .registrar {
     padding: 50px;
+    background-color: black;
+    text-align: center;
+    color: aliceblue;
 }
 
 /* Estilos para imágenes */
@@ -46,11 +52,9 @@ img {
     width: 50%;
     padding-right: 22px;
 }
-
 a:hover {
     color: red; /* Efecto hover para enlaces */
 }
-
 /* Botones */
 button {
     padding: 10px 20px;
@@ -59,20 +63,16 @@ button {
     border-radius: 0.25rem;
     transition: background-color 0.3s ease;
 }
-
 button:hover {
     background-color: #2563eb;
 }
-
 /* Estilo de botones para formularios */
 form .bg-green-500 {
     background-color: #48bb78; /* Color para botón de agregar nueva categoría */
 }
-
 form .bg-green-500:hover {
     background-color: #38a169; /* Hover para botón de agregar nueva categoría */
 }
-
 /* Estilos para el navbar */
 nav {
     display: flex;
@@ -81,12 +81,10 @@ nav {
     padding: 10px 20px; /* Espaciado interno */
     background-color: #1f2937; /* Color de fondo del navbar */
 }
-
 nav a {
     text-decoration: none;
     color: white;
 }
-
 .btn-header {
     width: auto; /* Cambiar a auto para permitir que el ancho se ajuste al contenido */
     padding: 8px 12px; /* Aumentar el padding para mejorar la apariencia */
@@ -99,11 +97,9 @@ nav a {
     margin: 0 5px;
     font-size: 0.9rem; /* Ajustar el tamaño de fuente */
 }
-
 .btn-header:hover {
     background-color: #2563eb;
 }
-
 /* Listas */
 ul {
     list-style-type: none;
@@ -113,7 +109,6 @@ ul {
     flex-wrap: nowrap; /* No permitir que los elementos se envuelvan */
     overflow: hidden; /* Evitar que los elementos desborden */
 }
-
 /* Header */
 .header {
     display: flex;
@@ -122,24 +117,20 @@ ul {
     padding: 20px;
     background-color: #1f2937;
 }
-
 .logo {
     display: flex;
     align-items: center;
     margin-right: 20px;
 }
-
 .logo img {
     height: 80px;
     margin-right: 10px;
 }
-
 .logo span {
     font-size: 3rem;
     font-weight: bold;
     color: aliceblue;
 }
-
 /* Footer */
 footer {
     text-align: center;
@@ -147,13 +138,11 @@ footer {
     background-color: #1f2937; /* Fondo oscuro para el footer */
     color: aliceblue; /* Color claro para el texto */
 }
-
 .footer-links {
     display: flex;
     justify-content: center;
     gap: 2rem;
 }
-
 .footer-link {
     padding: 10px 20px;
     background-color: #3b82f6; /* Color de fondo del botón */
@@ -164,21 +153,17 @@ footer {
     font-size: 1rem; /* Tamaño de texto más grande para los botones */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .footer-link:hover {
     background-color: #2563eb; /* Fondo más oscuro en hover */
     color: red; /* Cambia el color del texto en hover */
 }
-
 footer a img {
     width: 70%;
 }
-
 /* Ajustes adicionales */
 a img {
     width: 70%;
 }
-
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
     nav {
@@ -189,129 +174,9 @@ a img {
         flex-direction: column; /* Cambiar a columna para la lista */
         align-items: flex-start; /* Alinear a la izquierda */
     }
-
     .btn-header {
         width: 100%; /* Hacer que los botones ocupen el ancho completo */
         margin-bottom: 10px; /* Espacio entre botones */
     }
 }
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-}
-
-.search-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.result-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.result-item {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.result-link {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-}
-
-.result-link:hover {
-    color: #007bff;
-    text-decoration: underline;
-}
-
-.no-results {
-    font-size: 16px;
-    text-align: center;
-    color: #999;
-}
-.form-header {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.category-form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.category-form p {
-    margin-bottom: 15px;
-}
-
-.btn-submit {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-submit:hover {
-    background-color: #0056b3;
-}
-
-.btn-back {
-    display: block;
-    width: fit-content;
-    margin: 20px auto 0;
-    padding: 10px;
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-}
-
-.btn-back:hover {
-    color: #007bff;
-    background-color: #f1f1f1;
-}
-.order-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.order-buttons .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-}
-.post-thumbnail {
-    width: 100%; /* Ajuste de tamaño del contenedor de la imagen */
-    max-height: 200px; /* Define un alto máximo */
-    overflow: hidden; /* Para evitar el desbordamiento */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.img-fluid {
-    width: auto;
-    height: 100%; /* Escala la altura automáticamente */
-    object-fit: cover; /* Mantiene el centro de la imagen visible */
-}
+ }

@@ -37,12 +37,10 @@
 
 <!-- JavaScript para el botón "Volver arriba" -->
 <script>
-    // Función para desplazarse hacia arriba
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Mostrar el botón al desplazarse hacia abajo
     window.onscroll = function() {
         var backToTopButton = document.getElementById("back-to-top");
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
